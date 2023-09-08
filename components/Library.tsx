@@ -1,12 +1,18 @@
 import React from 'react'
 import { TbPlaylist } from 'react-icons/tb'
 import { AiOutlinePlus } from 'react-icons/ai'
+import useAuthModal from '@/hooks/useAuthModal'
+import { useUser } from '@/hooks/useUser'
 
 type Props = {}
 
 const Library = (props: Props) => {
+  const user = useUser();
+  const authModal = useAuthModal();
   const onClick = () => {
-
+    if (!user) {
+      return authModal.onOpen();
+    }
   }
   return (
     <div className='flex flex-col'>

@@ -79,3 +79,17 @@ export interface UserContextProps {
   isLoading: boolean;
   subscription: Subscriprion | null;
 }
+
+export interface ModalWindowProps {
+  isOpen: boolean;
+  onChange: (open: boolean) => void;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}
+
+export interface AuthModalProps {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}
