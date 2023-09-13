@@ -11,10 +11,11 @@ const AuthModal = () => {
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
   const { session } = useSessionContext();
+  const authModal = useAuthModal();
   const { onClose, isOpen } = useAuthModal();
 
   const onChange = (open: boolean) => {
-    if (!isOpen) {
+    if (!open) {
       onClose();
     }
   }
@@ -24,15 +25,15 @@ const AuthModal = () => {
       router.refresh();
       onClose();
     }
-  }, [session, router, onClose])
-  
+  }, [session, router, onClose]);
+
 
   return (
     <ModalWindow
       title='Welcome back!'
       description='Login to your account'
-      isOpen={isOpen}
-      onChange={() => { }}
+      isOpen={authModal.isOpen}
+      onChange={onChange}
     >
       <Auth
         providers={["github"]}

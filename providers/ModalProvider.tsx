@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import ModalWindow from '@/components/ModalWindow';
 import AuthModal from '@/components/AuthModal';
+import UploadModal from '@/components/UploadModal';
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -23,7 +24,10 @@ const ModalProvider = () => {
     // >
     //   Test
     // </ModalWindow>
-    <AuthModal />
+    <>
+      <AuthModal />
+      <UploadModal />
+    </>
   )
 }
 

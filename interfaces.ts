@@ -89,7 +89,10 @@ export interface ModalWindowProps {
 }
 
 export interface AuthModalProps {
-  isOpen: boolean;
+  isOpen: boolean; 
   onOpen: () => void;
   onClose: () => void;
 }
+
+export interface UploadModalProps extends AuthModalProps {};
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {};
