@@ -96,3 +96,21 @@ export interface AuthModalProps {
 
 export interface UploadModalProps extends AuthModalProps {};
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {};
+
+export interface SongProps {
+  id: string;
+  user_id: string;
+  author: string;
+  title: string;
+  song_path: string;
+  image_path: string;
+}
+
+export interface PageContentProps {
+  songs: SongProps[];
+}
+
+export interface SongItemProps {
+  data: SongProps;
+  onClick: (id: string) => void;
+}

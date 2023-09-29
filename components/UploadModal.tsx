@@ -39,7 +39,15 @@ const UploadModal = () => {
       const songFile = values.song?.[0]
       const imageFile = values.image?.[0]
       if (!imageFile || !songFile || !user) {
-        toast.error("Missing fields")
+        if (!imageFile) {
+          toast.error("Missing image file");
+        }
+        if (!songFile) {
+          toast.error("Missing song file");
+        }
+        if (!user) {
+          toast.error("Missing user");
+        }
         return;
       }
       const uniqueID = uniqid();
