@@ -2,6 +2,7 @@ import React from 'react'
 import { SongItemProps } from '@/interfaces'
 import useLoadImage from '@/hooks/useLoadImage'
 import Image from 'next/image'
+import PlayButton from './PlayButton'
 
 const SongItem = ({ data, onClick }: SongItemProps) => {
   const imagePath = useLoadImage(data)
@@ -24,6 +25,12 @@ const SongItem = ({ data, onClick }: SongItemProps) => {
         <p className='w-full font-semibold truncate'>
           {data.title}
         </p>
+        <p className='w-full font-semibold truncate'>
+          By {data.author}
+        </p>
+      </div>
+      <div className='absolute bottom-26 right-5'>
+        <PlayButton />
       </div>
     </div>
   )

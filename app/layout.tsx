@@ -6,6 +6,7 @@ import SuperbaseProvider from '@/providers/SuperbaseProvider'
 import UserProvider from '@/providers/UserProvider'
 import ModalProvider from '@/providers/ModalProvider'
 import ToasterProvider from '@/providers/ToasterProvider'
+import getSongsById from '@/actions/getSongsById'
 
 const font = Figtree({ subsets: ['latin'] })
 
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
   description: 'Let headbanging!',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const userSongs = await getSongsById();
   return (
     <html lang="en">
       <body className={font.className}>
