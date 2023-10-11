@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   description: 'Let headbanging!',
 }
 
+export const revalidate = 0;
+
 export default async function RootLayout({
   children,
 }: {
@@ -28,7 +30,7 @@ export default async function RootLayout({
         <SuperbaseProvider>
           <UserProvider>
             <ModalProvider/>
-              <Sidebar>
+              <Sidebar songs={userSongs}>
                 {children}
               </Sidebar>
           </UserProvider>

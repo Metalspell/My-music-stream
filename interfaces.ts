@@ -4,6 +4,11 @@ import { User } from "@supabase/auth-helpers-nextjs";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> { }
 
+export interface SidebarProps {
+  children?: React.ReactNode;
+  songs: SongProps[];
+}
+
 export interface HeaderProps {
   className?: string
   children: React.ReactNode;
@@ -89,13 +94,15 @@ export interface ModalWindowProps {
 }
 
 export interface AuthModalProps {
-  isOpen: boolean; 
+  isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-export interface UploadModalProps extends AuthModalProps {};
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {};
+export interface UploadModalProps extends AuthModalProps { };
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { };
+export interface LibraryProps extends SidebarProps { }
+export interface SearchContentProps extends SidebarProps { }
 
 export interface SongProps {
   id: string;
@@ -113,4 +120,15 @@ export interface PageContentProps {
 export interface SongItemProps {
   data: SongProps;
   onClick: (id: string) => void;
+}
+
+export interface MediaItemProps {
+  data: SongProps;
+  onClick?: (id: string) => void;
+}
+
+export interface SearchProps {
+  searchParams: {
+    title: string;
+  }
 }
