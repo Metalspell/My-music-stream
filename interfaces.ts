@@ -132,3 +132,12 @@ export interface SearchProps {
     title: string;
   }
 }
+
+export interface LikeButtonProps {
+  songId: string;
+}
+
+export interface FetchDataProps {
+  userId: number, 
+  songId: number
+}
