@@ -117,6 +117,8 @@ export interface PageContentProps {
   songs: SongProps[];
 }
 
+export interface LikedContentProps extends PageContentProps { }
+
 export interface SongItemProps {
   data: SongProps;
   onClick: (id: string) => void;
@@ -140,4 +142,12 @@ export interface LikeButtonProps {
 export interface FetchDataProps {
   userId: number, 
   songId: number
+}
+
+export interface PlayerStoreProps {
+  ids: string[];
+  activeId?: string;
+  setId: (id: string) => void;
+  setIds: (ids: string[]) => void;
+  reset: () => void;
 }

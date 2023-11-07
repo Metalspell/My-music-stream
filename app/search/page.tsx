@@ -4,6 +4,8 @@ import { SearchProps } from "@/interfaces"
 import SearchInput from "@/components/SearchInput";
 import SearchContent from "./component/SearchContent";
 
+export const revalidate = 0;
+
 const Search = async ({ searchParams }: SearchProps) => {
   const songs = await getSongsByTitle(searchParams.title);
   return (
