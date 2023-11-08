@@ -1,8 +1,10 @@
 "use client"
 import SongItem from "@/components/SongItem"
+import useOnPlay from "@/hooks/useOnPlay"
 import { PageContentProps } from "@/interfaces"
 
 const PageContent = ({ songs }: PageContentProps) => {
+  const onPlay = useOnPlay(songs);
   return (
     <>
       {songs.length === 0 ? (
@@ -15,7 +17,7 @@ const PageContent = ({ songs }: PageContentProps) => {
             songs.map((song) => (
               <SongItem
                 key={song.id}
-                onClick={() => { }}
+                onClick={(id: string) => onPlay(id)}
                 data={song}
               />
             ))

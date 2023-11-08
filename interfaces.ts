@@ -151,3 +151,8 @@ export interface PlayerStoreProps {
   setIds: (ids: string[]) => void;
   reset: () => void;
 }
+
+export interface PlayerContentProps {
+  song: SongProps;
+  songUrl: string;
+}
