@@ -5,9 +5,7 @@ import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import usePlayer from "@/hooks/usePlayer"
 import PlayerContent from "./PlayerContent";
 
-type Props = {}
-
-const Player = (props: Props) => {
+const Player = () => {
   const player = usePlayer();
   const { song } = useGetSongById(player.activeId);
   const songUrl = useLoadSongUrl(song!);

@@ -156,3 +156,9 @@ export interface PlayerContentProps {
   song: SongProps;
   songUrl: string;
 }
+
+export interface SliderProps {
+  value?: number;
+  onChange?:(value: number) => void;
+}
+
