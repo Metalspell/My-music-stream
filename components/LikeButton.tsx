@@ -20,9 +20,6 @@ const LikeButton = ({ songId }: LikeButtonProps) => {
     if (!user?.id) {
       return;
     }
-
-    console.log(typeof user.id + ' userID')
-    console.log(typeof songId + ' songId')
     const fetchData = async () => {
       const { data, error } = await supabaseClient
         .from('liked_songs')
@@ -38,7 +35,8 @@ const LikeButton = ({ songId }: LikeButtonProps) => {
   }, [songId, supabaseClient, user?.id])
 
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
-
+  
+  /* eslint-disable react-hooks/rules-of-hooks */
   const handleClick = async () => {
     if (!user) {
       return authModal.onOpen();
@@ -77,6 +75,7 @@ const LikeButton = ({ songId }: LikeButtonProps) => {
     }
     router.refresh();
   }
+  /* eslint-enable react-hooks/rules-of-hooks */
 
   return (
     <button
