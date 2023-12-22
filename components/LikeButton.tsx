@@ -39,7 +39,7 @@ const LikeButton = ({ songId }: LikeButtonProps) => {
   /* eslint-disable react-hooks/rules-of-hooks */
   const handleClick = async () => {
     if (!user) {
-      return authModal.onOpen();
+      return authModal.onOpen("signin");
     }
 
     if (isLiked) {
