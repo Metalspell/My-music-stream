@@ -2,11 +2,12 @@ import getSongs from "@/actions/getSongs";
 import Header from "@/components/Header"
 import ListItem from "@/components/ListItem"
 import PageContent from "./components/PageContent";
+import getSongsById from "@/actions/getSongsById";
 
 export const revalidate = 0;
 
 const Home = async () => {
-  const songs = await getSongs();
+  const songs = await getSongsById();
   return (
     <div className="w-full h-full overflow-hidden overflow-y-auto rounded-lg bg-neutral-900">
       <Header>

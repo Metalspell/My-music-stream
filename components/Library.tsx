@@ -15,7 +15,7 @@ const Library = ({ songs }: LibraryProps) => {
   const onPlay = useOnPlay(songs);
   const onClick = () => {
     if (!user) {
-      return authModal.onOpen();
+      return authModal.onOpen("signin");
     }
     return uploadModal.onOpen();
   }

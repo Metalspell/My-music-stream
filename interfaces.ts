@@ -95,11 +95,17 @@ export interface ModalWindowProps {
 
 export interface AuthModalProps {
   isOpen: boolean;
-  onOpen: () => void;
+  mode: 'signin' | 'signup';
+  onOpen: (mode: 'signin' | 'signup') => void; 
   onClose: () => void;
 }
 
-export interface UploadModalProps extends AuthModalProps { };
+export interface UploadModalProps { 
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+};
+
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { };
 export interface LibraryProps extends SidebarProps { }
 export interface SearchContentProps extends SidebarProps { }

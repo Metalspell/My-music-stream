@@ -22,15 +22,28 @@ const UserContextProvider = (props: Props) => {
   const [userDetails, setUserDetails] = useState<UserInfo | null>(null);
   const [subscription, setSubscription] = useState<Subscriprion | null>(null);
 
-  const getUserDetails = () => supabase
-    .from('users')
-    .select('*')
-    .single();
-  const getSubscription = () => supabase
-    .from('subscriptions')
-    .select('*, prices(*, products(*))')
-    .in('status', ['trialing', 'active'])
-    .single();
+  const getUserDetails = () => {
+    if (user?.id) {
+      return supabase
+        .from('users')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+    }
+    return Promise.reject("User ID not available");
+  };
+
+  const getSubscription = () => {
+    if (user?.id) {
+      return supabase
+        .from('subscriptions')
+        .select('*, prices(*, products(*))')
+        .eq('user_id', user.id)
+        .in('status', ['trialing', 'active'])
+        .single();
+    }
+    return Promise.reject("User ID not available");
+  };
 
   useEffect(() => {
     if (user && !isLoadingData && !userDetails && !subscription) {
@@ -62,6 +75,7 @@ const UserContextProvider = (props: Props) => {
     isLoading: isLoadingUser || isLoadingData,
     subscription
   }
+
   return <UserContext.Provider value={value} {...props} />
 }
 

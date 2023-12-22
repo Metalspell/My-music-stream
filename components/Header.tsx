@@ -88,7 +88,7 @@ const Header = ({ className, children }: HeaderProps) => {
             <>
               <div>
                 <Button
-                  onClick={authModal.onOpen}
+                  onClick={() => authModal.onOpen('signup')}
                   className='font-medium bg-tranparent text-neutral-300'
                 >
                   Sign Up
@@ -96,7 +96,7 @@ const Header = ({ className, children }: HeaderProps) => {
               </div>
               <div>
                 <Button
-                  onClick={authModal.onOpen}
+                  onClick={() => authModal.onOpen('signin')}
                   className='px-6 py-2 bg-white'
                 >
                   LogIn

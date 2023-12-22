@@ -12,7 +12,7 @@ const AuthModal = () => {
   const router = useRouter();
   const { session } = useSessionContext();
   const authModal = useAuthModal();
-  const { onClose, isOpen } = useAuthModal();
+  const { onClose, isOpen, mode } = useAuthModal();
 
   const onChange = (open: boolean) => {
     if (!open) {
@@ -27,12 +27,14 @@ const AuthModal = () => {
     }
   }, [session, router, onClose]);
 
+  const title = mode === 'signin' ? 'Welcome back!' : 'Create an account';
+  const description = mode === 'signin' ? 'Login to your account' : 'Sign up for a new account';
 
   return (
     <ModalWindow
-      title='Welcome back!'
-      description='Login to your account'
-      isOpen={authModal.isOpen}
+      title={title}
+      description={description}
+      isOpen={isOpen}
       onChange={onChange}
     >
       <Auth
@@ -51,9 +53,10 @@ const AuthModal = () => {
           }
         }}
         supabaseClient={supabaseClient}
+        view={mode === 'signin' ? 'sign_in' : 'sign_up'}
       />
     </ModalWindow>
-  )
-}
+  );
+};
 
-export default AuthModal
+export default AuthModal;

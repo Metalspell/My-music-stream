@@ -4,12 +4,14 @@ import { AuthModalProps } from '@/interfaces'
 
 const useAuthModal = create<AuthModalProps>((set) => ({
   isOpen: false,
-  onOpen: () => set({
-    isOpen: true
+  mode: 'signin',
+  onOpen: (mode) => set({
+    isOpen: true,
+    mode: mode || 'signin'
   }),
   onClose: () => set({
     isOpen: false
-  })
-}))
+  }),
+}));
 
-export default useAuthModal
+export default useAuthModal;

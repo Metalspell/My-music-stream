@@ -14,9 +14,9 @@ import { useRouter } from 'next/navigation'
 
 const UploadModal = () => {
   const { user } = useUser();
+  console.log(user?.id)
   const supabaseClient = useSupabaseClient();
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
       autor: '',
@@ -24,8 +24,9 @@ const UploadModal = () => {
       song: null,
       image: null,
     }
-  })
+  });
   const uploadModal = useUploadModal();
+
   const onChange = (open: boolean) => {
     if (!open) {
       reset();
@@ -36,8 +37,9 @@ const UploadModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
     try {
       setIsLoading(true);
-      const songFile = values.song?.[0]
-      const imageFile = values.image?.[0]
+      const songFile = values.song?.[0];
+      const imageFile = values.image?.[0];
+
       if (!imageFile || !songFile || !user) {
         if (!imageFile) {
           toast.error("Missing image file");
@@ -50,49 +52,55 @@ const UploadModal = () => {
         }
         return;
       }
+
       const uniqueID = uniqid();
+
       const { data: songData, error: songError } = await supabaseClient
         .storage
         .from('songs')
-        .upload(`song-${values.title}-${uniqueID}`, songFile, {
+        .upload(`user-${user.id}/song-${values.title}-${uniqueID}`, songFile, {
           cacheControl: '3600',
           upsert: false
-        })
+        });
+
       if (songError) {
         setIsLoading(false);
-        return toast.error("Failed song upload")
+        return toast.error("Failed song upload");
       }
+
       const { data: imageData, error: imageError } = await supabaseClient
         .storage
         .from('images')
-        .upload(`image-${values.title}-${uniqueID}`, imageFile, {
+        .upload(`user-${user.id}/image-${values.title}-${uniqueID}`, imageFile, {
           cacheControl: '3600',
           upsert: false
-        })
+        });
+
       if (imageError) {
         setIsLoading(false);
-        return toast.error("Failed image upload")
+        return toast.error("Failed image upload");
       }
+
       const { error: supabaseError } = await supabaseClient
         .from('songs')
         .insert({
-          user_id: user.id,
+          user_id: user?.id,
           title: values.title,
           author: values.author,
           image_path: imageData.path,
           song_path: songData.path
         });
-        if (supabaseError) {
-          setIsLoading(false);
-          return toast.error(supabaseError.message)
-        }
-        router.refresh();
+
+      if (supabaseError) {
         setIsLoading(false);
-        toast.success('Song created!');
-        reset();
-        uploadModal.onClose;
+        return toast.error(supabaseError.message);
+      }
+
+      toast.success('Song created!');
+      reset();
+      uploadModal.onClose();
     } catch (error) {
-      toast.error("Something went wrong")
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -150,7 +158,6 @@ const UploadModal = () => {
         </Button>
       </form>
     </ModalWindow>
-  )
+  );
 }
-
 export default UploadModal
